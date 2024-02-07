@@ -1,4 +1,4 @@
-import Story from '../models/posts.js'
+
 
 
 // const story = Story({
@@ -7,6 +7,3 @@ import Story from '../models/posts.js'
 // })
 
 // await story.save();
-
-const story = await Story.find({})
-console.log(story);

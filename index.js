@@ -1,21 +1,25 @@
 import express from "express";
 // import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
-// import {bodyParser } from 'body-parser';
+import bodyParser from 'body-parser';
 import "dotenv/config";
-import './src/db_connect.js'
+import story_router from "./routes/story.js";
+import user_router from "./routes/user.js";
 
 // created an express app
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/story', story_router)
+app.use('/user', user_router)
 const PORT = process.env.PORT || 3001;
 // connecting to MongoDB
 const uri = "mongodb://localhost:27017/imarticus";
 
 mongoose
-  .connect(uri)
+  .connect(uri,{autoIndex: true})
   .then(() => console.log("Connected to MongoDB!"))
-  .catch(() => console.log("Error connecting to MongoDB"));
-
+  .catch(() => console.error("Error connecting to MongoDB"));
 
 
 

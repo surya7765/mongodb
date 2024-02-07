@@ -1,24 +1,28 @@
 import {Schema, model} from "mongoose";
+// import User from "./users.js";
 
 const story = new Schema({
     title: {
-        type: "string",
-        required: true
+        type: String,
+        required: true,
+        unique: true
     },
     body: {
-        type: "string",
+        type: String,
         required: true
     },
     author: {
-        type: "string",
+        type: String,
         required: true
+        // type: Schema.Types.ObjectId,
+        // ref: 'User'
     },
     created_at: {
         type: Date
     },
     published: {
         type: Boolean
-    }
+    },
 })
 
 const Story = model('Story', story);
