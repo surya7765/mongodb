@@ -20,9 +20,10 @@ validators.validateEmail = (email) => {
   return true;
 };
 
-validators.validatePassword = (pass) => {
+validators.validatePassword = (password) => {
   var pass=  /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$/;
-  if (pass.test(pass)) {
+  // console.log(pass.exec(password));
+  if(pass.exec(password) === null) {
     let err = new Error("Invalid password, please enter password as per specifications");
     err.status = 400;
     throw err;

@@ -1,4 +1,5 @@
 import {Schema, model} from "mongoose";
+import bcrypt from 'bcrypt';
 
 const user = new Schema({
     username: {
@@ -12,6 +13,7 @@ const user = new Schema({
     },
     age: {
         type: Number,
+        min: [13, "Age below 13 is not allowed"]
     },
     email: {
         type: String,
@@ -21,6 +23,18 @@ const user = new Schema({
         type: String,
         required: true
     }
+})
+// Mongoose Hooks
+// Before saving the document to the database
+// It's going to hash the password
+// Implementation like a middleware
+user.pre('save', async function(next){
+    const saltRounds = this.username.length || 10
+    const salt = await bcrypt.genSalt(saltRounds);
+    // console.log(salt);
+    const hash = await bcrypt.hash(this.password, salt)
+    this.password = hash;
+    next();
 })
 
 const User = model('User', user);
