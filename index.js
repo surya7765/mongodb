@@ -2,6 +2,7 @@ import express from "express";
 // import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import "dotenv/config";
 import story_router from "./routes/story.js";
 import user_router from "./routes/user.js";
@@ -10,6 +11,7 @@ import user_router from "./routes/user.js";
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use('/story', story_router)
 app.use('/user', user_router)
 const PORT = process.env.PORT || 3001;
