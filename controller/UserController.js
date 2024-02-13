@@ -27,4 +27,25 @@ const getSingleUser =  async (req, res) => {
     }
 }
 
-export default {getAllUser, getSingleUser}
+
+const updateUser = async (req, res) => {
+
+}
+
+
+const deleteUser = async (req, res) => {
+    // console.log(req.params.username);
+    try {
+        const user = await User.findOneAndDelete({username:req.params.username});
+        console.log(user);
+        if(user){
+            res.status(200).json({"success":"User deleted successfully!"});
+        } else {
+            res.status(404).json({"error":"User not found"})
+        }
+    } catch (error) {
+        res.status(404).json({"error":error.message});
+    }
+}
+
+export default {getAllUser, getSingleUser,updateUser,deleteUser}

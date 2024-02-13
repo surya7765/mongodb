@@ -27,7 +27,7 @@ const Register = async (req, res, next) => {
                 res.status(403).json({error: error.message})
             }
         } else {
-            res.send(userData)
+            res.status(400).json({"error": "Invalid credentials"})
         }
     } catch (error) {
         res.json({error: error.message})
